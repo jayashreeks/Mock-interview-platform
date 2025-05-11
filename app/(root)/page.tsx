@@ -4,8 +4,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { dummyInterviews } from '@/constants'
 import InterviewCard from '@/components/InterviewCard'
-import { get } from 'http'
-import { getCurrentUser, getInterviewsByUserId, getLatestInterviews } from '@/lib/actions/auth.action'
+import { getCurrentUser} from '@/lib/actions/auth.action'
+import { getInterviewsByUserId, getLatestInterviews } from '@/lib/actions/general.action'
 
 const page = async () => {
 
@@ -35,7 +35,7 @@ const page = async () => {
       </section>
       <section className='flex flex-col gap-6 mt-8'>
         <h2>Your Interviews</h2>
-        
+
         <div className='interviews-section'>
           { hasPastInterviews ? (
               userInterviews?.map((interview)=>(
