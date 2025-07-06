@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import Image from 'next/image';
-import { getRandomInterviewCover } from '@/lib/utils';
+import { getRandomInterviewCover ,cn } from '@/lib/utils';
 import { Button } from "./ui/button";
 import Link from 'next/link';
 import DisplayTechIcons from './DisplayTechIcons';
@@ -15,11 +15,22 @@ const InterviewCard = async ({ id, userId, role, type, techstack, createdAt}: In
       : null;
     const normalisedType= /mix/gi.test(type) ? "Mixed" : type;
     const formattedDate=dayjs(feedback?.createdAt||createdAt||Date.now()).format("MMMM D, YYYY");
+
+    const badgeColor =
+    {
+      Behavioral: "bg-light-400",
+      Mixed: "bg-light-600",
+      Technical: "bg-light-800",
+    }[normalisedType] || "bg-light-600";
+
   return (
     <div className="card-border w-[300px] max-sm:w-full min-h-96">
         <div className="card-interview">
-            <div className='absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-light-600'>
-                <div>
+            <div >
+                <div className={cn(
+                "absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg",
+                badgeColor
+                )}>
                     <p className='badge-text'>{normalisedType}</p>
                 </div>
                 <Image 
